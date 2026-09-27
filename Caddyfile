@@ -1,0 +1,14 @@
+{
+    auto_https off
+    admin off
+}
+
+:8080 {
+    handle /files* {
+        reverse_proxy 127.0.0.1:8081
+    }
+
+    handle {
+        reverse_proxy 127.0.0.1:8096
+    }
+}
