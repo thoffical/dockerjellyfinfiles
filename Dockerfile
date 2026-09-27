@@ -17,7 +17,9 @@ RUN apt-get update \
 
 COPY Caddyfile /etc/caddy/Caddyfile
 COPY start.sh /usr/local/bin/start-blitz.sh
-RUN chmod 755 /usr/local/bin/start-blitz.sh && chown 1000:1000 /etc/caddy/Caddyfile
+
+RUN chmod 755 /usr/local/bin/start-blitz.sh \
+    && chown 1000:1000 /etc/caddy/Caddyfile
 
 ENV JELLYFIN_DATA_DIR=/config \
     JELLYFIN_CONFIG_DIR=/config/config \
@@ -26,7 +28,9 @@ ENV JELLYFIN_DATA_DIR=/config \
     FILEBROWSER_ROOT=/media
 
 EXPOSE 8080
+
 VOLUME ["/config", "/cache", "/media"]
 
 USER 1000:1000
+
 ENTRYPOINT ["/usr/local/bin/start-blitz.sh"]
